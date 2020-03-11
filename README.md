@@ -1,1 +1,1 @@
-docker build -t brsynth/extracttaxonomy-standalone .
+docker build -t brsynth/extracttaxonomy-standalone:dev .
