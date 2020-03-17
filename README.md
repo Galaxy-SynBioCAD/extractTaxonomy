@@ -18,7 +18,7 @@ Required:
 To compile the docker use the following command:
 
 ```
-docker build -t brsynth/extracttaxonomy-standalone:dev .
+docker build -t brsynth/extracttaxonomy-standalone .
 ```
 
 ### Running the test

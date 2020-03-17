@@ -19,7 +19,7 @@ import docker
 #
 def main(inputfile, output):
     docker_client = docker.from_env()
-    image_str = 'brsynth/extracttaxonomy-standalone:dev'
+    image_str = 'brsynth/extracttaxonomy-standalone'
     try:
         image = docker_client.images.get(image_str)
     except docker.errors.ImageNotFound:
