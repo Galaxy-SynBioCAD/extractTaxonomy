@@ -13,6 +13,10 @@ Required:
 
 * **-output**: (string) Path to the output json file
 
+## Dependencies
+
+* Base docker image: [brsynth/rpbase](https://hub.docker.com/r/brsynth/rpbase)
+
 ## Installing
 
 To compile the docker use the following command:
@@ -28,10 +32,6 @@ To run the test, run the following command:
 ```
 python run.py -input test/e_coli_model.sbml -output test/taxonomy.json
 ```
-
-## Dependencies
-
-* Base docker image: [brsynth/rpbase](https://hub.docker.com/r/brsynth/rpbase)
 
 ## Contributing
 
