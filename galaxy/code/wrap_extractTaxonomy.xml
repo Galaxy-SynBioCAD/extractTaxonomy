@@ -1,0 +1,83 @@
+<tool id="extractTaxonomy" name="Extract Taxonomy" version="0.1">
+  <description>Extract the taxonomy ID from an SBML</description>
+  <requirements>
+    <container type="docker">brsynth/extracttaxonomy-standalone:dev</container>
+  </requirements>
+  <stdio>
+    <regex match="WARNING:" level="warning" />
+    <regex match="ERROR:" level="error" />
+  </stdio>
+  <command detect_errors="exit_code"><![CDATA[
+    '$__tool_directory__/tool_extractTaxonomy.py' -input '$input' -output '$output'
+  ]]></command>
+  <inputs>
+    <param name="input" type="data" format="sbml" label="SBML input" />
+  </inputs>
+  <outputs>
+    <data name="output" format="json" label="Taxonomy JSON" />
+  </outputs>
+  <help><![CDATA[
+Extract Taxonomy
+==================
+
+Tool that parses a GEM SBML model and outputs a JSON with the taxonomy ID of the model
+
+Input
+-----
+
+Required:
+
+
+* **-input**\ : (string) Path to the input SBML file
+
+Output
+------
+
+
+* **-output**\ : (string) Path to the output json file
+
+Project Links
+---------------------
+
+* `GitHub <https://github.com/Galaxy-SynBioCAD/extractTaxonomy>`_
+
+
+Version
+----------
+
+0.1
+
+Authors
+-------
+
+
+* **Melchior du Lac** 
+
+License
+-------
+
+`MIT <https://raw.githubusercontent.com/Galaxy-SynBioCAD/extractTaxonomy/standalone-dev/LICENSE>`_
+
+Acknowledgments
+---------------
+
+
+* Thomas Duigou
+* Joan Hérisson
+
+]]></help>
+  <citations>
+    <citation type="bibtex">
+@article{federhen2012ncbi,
+  title={The NCBI taxonomy database},
+  author={Federhen, Scott},
+  journal={Nucleic acids research},
+  volume={40},
+  number={D1},
+  pages={D136--D143},
+  year={2012},
+  publisher={Oxford University Press}
+}
+    </citation>
+  </citations>
+</tool>

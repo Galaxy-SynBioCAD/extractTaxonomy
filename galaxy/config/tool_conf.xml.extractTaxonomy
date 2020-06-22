@@ -1,0 +1,3 @@
+  <section id="sbc" name="SynBioCAD">
+    <tool file="extractTaxonomy/code/wrap_extractTaxonomy.xml" />
+  </section>
