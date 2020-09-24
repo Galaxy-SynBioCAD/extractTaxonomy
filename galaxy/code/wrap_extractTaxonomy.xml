@@ -1,7 +1,7 @@
 <tool id="extractTaxonomy" name="Extract Taxonomy" version="0.1">
   <description>Extract the taxonomy ID from an SBML</description>
   <requirements>
-    <container type="docker">brsynth/extracttaxonomy-standalone:dev</container>
+    <container type="docker">brsynth/extracttaxonomy-standalone:v2</container>
   </requirements>
   <stdio>
     <regex match="WARNING:" level="warning" />
