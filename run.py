@@ -20,8 +20,8 @@ def main(inputfile, output):
     :param inputfile: The path to the SBML file
     :param output: The path to the output json file
 
-    :param inputfile: str
-    :param output: str
+    :type inputfile: str
+    :type output: str
 
     :rtype: None
     :return: None

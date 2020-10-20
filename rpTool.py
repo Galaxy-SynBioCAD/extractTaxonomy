@@ -9,8 +9,8 @@ def getTaxon(sbml_path, output_path):
     :param sbml_path: The path to the SBML file
     :param output_path: The path to the output json file
 
-    :param sbml_path: str
-    :param output_path: str
+    :type sbml_path: str
+    :type output_path: str
 
     :rtype: None
     :return: None
