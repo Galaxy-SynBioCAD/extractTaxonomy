@@ -2,6 +2,7 @@
 
 import rpSBML
 import json
+import logging
 
 def getTaxon(sbml_path, output_path):
     """Return the Taxonomy id from an SBML file
@@ -22,5 +23,6 @@ def getTaxon(sbml_path, output_path):
         host_taxonomy_id = int(taxon_dict['taxonomy'][0])
     except (ValueError, KeyError) as e:
         taxon_dict = {'taxonomy': ['-1']}
+        logging.error('Cannot find the correct version')
     with open(output_path, 'w') as f:
         json.dump(taxon_dict, f)  
