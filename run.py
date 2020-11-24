@@ -14,10 +14,18 @@ import shutil
 import docker
 
 
-##
-#
-#
 def main(inputfile, output):
+    """Call the extractTaxonomy docker to return the JSON file
+
+    :param inputfile: The path to the SBML file
+    :param output: The path to the output json file
+
+    :type inputfile: str
+    :type output: str
+
+    :rtype: None
+    :return: None
+	"""
     docker_client = docker.from_env()
     image_str = 'brsynth/extracttaxonomy-standalone'
     try:
@@ -31,28 +39,35 @@ def main(inputfile, output):
             logging.error('Cannot pull image: '+str(image_str))
             exit(1)
     with tempfile.TemporaryDirectory() as tmpOutputFolder:
-        shutil.copy(inputfile, tmpOutputFolder+'/input.dat')
-        command = ['/home/tool_rpCofactors.py',
-                   '-input',
-                   '/home/tmp_output/input.dat',
-                   '-output',
-                   '/home/tmp_output/output.dat']
-        container = docker_client.containers.run(image_str, 
-                                                 command, 
-                                                 detach=True, 
-                                                 stderr=True, 
-                                                 volumes={tmpOutputFolder+'/': {'bind': '/home/tmp_output', 'mode': 'rw'}})
-        container.wait()
-        err = container.logs(stdout=False, stderr=True)
-        print(err)
-        shutil.copy(tmpOutputFolder+'/output.dat', output)
-        container.remove()
- 
+        if os.path.exists(inputfile):
+            shutil.copy(inputfile, tmpOutputFolder+'/input.dat')
+            command = ['/home/tool_extractTaxonomy.py',
+                       '-input',
+                       '/home/tmp_output/input.dat',
+                       '-output',
+                       '/home/tmp_output/output.dat']
+            container = docker_client.containers.run(image_str, 
+                                                     command, 
+                                                     detach=True, 
+                                                     stderr=True, 
+                                                     volumes={tmpOutputFolder+'/': {'bind': '/home/tmp_output', 'mode': 'rw'}})
+            container.wait()
+            err = container.logs(stdout=False, stderr=True)
+            err_str = err.decode('utf-8')
+            if 'ERROR' in err_str:
+                print(err_str)
+            elif 'WARNING' in err_str:
+                print(err_str)
+            if not os.path.exists(tmpOutputFolder+'/output.dat'):
+                print('ERROR: Cannot find the output file: '+str(tmpOutputFolder+'/output.dat'))
+            else:
+                shutil.copy(tmpOutputFolder+'/output.dat', output)
+            container.remove()
+        else:
+            logging.error('Cannot find the input file: '+str(inputfile))
+            exit(1)
 
 
-##
-#
-#
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('Extract the t')
     parser.add_argument('-input', type=str)

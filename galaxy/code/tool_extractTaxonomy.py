@@ -12,7 +12,7 @@ import rpTool
 #
 #
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser('JSON report')
+    parser = argparse.ArgumentParser('Generate taxonomy id in a JSON')
     parser.add_argument('-input', type=str)
     parser.add_argument('-output', type=str)
     params = parser.parse_args()
